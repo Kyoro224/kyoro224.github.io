@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開発者のつぶやき - Developer Updates</title>
+    <style>
+        :root {
+            --primary-color: #6577B3;
+            --primary-hover: #54649b;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            background: var(--card-bg);
+            padding: 24px 20px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        h1 {
+            font-size: 1.35rem;
+            text-align: center;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: -8px;
+        }
+
+        .tweets-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 2px;
+        }
+
+        .tweet-card {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: border-color 0.2s;
+        }
+
+        .tweet-card:hover {
+            border-color: var(--primary-color);
+        }
+
+        .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tweet-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .tweet-content {
+            font-size: 0.85rem;
+            color: var(--text-color);
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .tweet-link {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .tweet-link:hover {
+            text-decoration: underline;
+        }
+
+        .back-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 0.85rem;
+            background-color: #f3f4f6;
+            color: var(--text-muted);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background-color: #e5e7eb;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>開発者のつぶやき</h1>
+        <p class="subtitle">日常のアップデートやちょっとしたお知らせ</p>
+
+        <div class="tweets-list" id="tweetsContainer">
+            <!-- 外部JSから自動挿入されます -->
+        </div>
+
+        <!-- 開発者ページに戻るリンク -->
+        <a href="/" class="back-btn">開発者ページに戻る</a>
+    </div>
+
+    <!-- 外部のつぶやきデータを読み込む -->
+    <script src="post.js"></script>
+    <script>
+        const container = document.getElementById('tweetsContainer');
+
+        // tweetsData が読み込まれているか確認して描画
+        if (typeof tweetsData !== 'undefined' && Array.isArray(tweetsData)) {
+            tweetsData.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'tweet-card';
+
+                let linkHtml = '';
+                if (post.link && post.linkText) {
+                    linkHtml = `<a href="${post.link}" class="tweet-link" target="_blank" rel="noopener noreferrer">${post.linkText}</a>`;
+                }
+
+                card.innerHTML = `
+                    <div class="tweet-header">
+                        <span class="tweet-date">${post.date}</span>
+                    </div>
+                    <div class="tweet-content">${post.content}</div>
+                    ${linkHtml}
+                `;
+
+                container.appendChild(card);
+            });
+        } else {
+            container.innerHTML = '<div style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">つぶやきデータの読み込みに失敗しました。</div>';
+        }
+    </script>
+
+</body>
+</html>

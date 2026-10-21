@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Kyoroの便利ツール",
+        "alternateName": "Kyoroの開発者ページ",
+        "url": "https://kyoro224.github.io/"
+    }
+</script>
+    
+    <!-- ▼ アイコン（ファビコン）の設定 ▼ -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- ▼ Web検索時のタイトルと説明文の設定 ▼ -->
+    <title>Kyoro-開発者について</title>
+    <meta name="description" content="Kyoroが開発した便利なWebツールをまとめて紹介しています。">
+    
+    <!-- ▼ SNSシェア時のプレビュー表示（OGP）設定 ▼ -->
+    <meta property="og:title" content="Kyoro-開発者について">
+    <meta property="og:description" content="Kyoroが開発した便利なWebツールを紹介中！">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Kyoroの便利ツール">  
+    <meta property="og:url" content="https://kyoro224.github.io/">
+
+    <style>
+        :root {
+            --primary-color: #6577B3;
+            --primary-hover: #54649b;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 画面全体の縦スクロールを有効化（高さ制限を解除） */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 24px 16px;
+        }
+
+        /* コンテナの高さ制限を解除し、自然なレイアウトに */
+        .container {
+            width: 100%;
+            max-width: 440px;
+            background: var(--card-bg);
+            padding: 24px 20px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            text-align: center;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .profile-card {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 22px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .avatar-placeholder {
+            width: 68px;
+            height: 68px;
+            background-color: #eef2ff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            line-height: 1;
+            padding-left: 1px;
+            padding-bottom: 2px;
+            margin-bottom: 8px;
+        }
+
+        .profile-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-color);
+            letter-spacing: 0.02em;
+            margin-bottom: 10px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 100%;
+            padding: 0 8px;
+        }
+
+        .bio {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        h2 {
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 4px;
+        }
+
+        /* ツールリストのみ3つ目以降を縦スクロールで表示 */
+        .works-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 175px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .works-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .works-list::-webkit-scrollbar-thumb {
+            background-color: #e5e7eb;
+            border-radius: 4px;
+        }
+
+        .work-item {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .work-item:hover {
+            border-color: var(--primary-color);
+            background-color: #f0f4ff;
+        }
+
+        .work-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 2px;
+        }
+
+        .work-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .site-footer {
+            text-align: center;
+            padding-top: 4px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4px;
+        }
+
+        .privacy-link {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .privacy-link:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        /* 初回起動時ウェルカム案内モーダルのスタイル */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 16px;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .close-modal-btn {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .modal-body {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .modal-action-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 0.95rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-align: center;
+        }
+
+        .modal-action-btn:hover {
+            background-color: var(--primary-hover);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 初回起動時ウェルカム案内モーダル -->
+    <div id="welcomeModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>ようこそ！</span>
+                <button id="closeWelcomeBtn" class="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                開発者ページへお越しいただきありがとうございます！このページでは、Kyoroが作成した便利なWebツールやアプリの紹介、つぶやきなどをまとめています。ぜひ色々触ってみてね！
+            </div>
+            <button id="startAppBtn" class="modal-action-btn">見る</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>開発者について</h1>
+
+        <div class="profile-card">
+            <img class="avatar-placeholder" src="/apple-touch-icon.png" alt="Kyoroのアイコン" width="68" height="68">
+            <div class="profile-name">Kyoro</div>
+            <div class="profile-info">
+                <p class="bio">
+                    日々の生活や創作活動に役立つWebアプリを作っています。
+                </p>
+            </div>
+        </div>
+
+        <section>
+            <h2>公開中の作品・ツール</h2>
+            <div class="works-list">
+                <a href="https://kyoro224.github.io/pixel-art-tool/" class="work-item">
+                    <div>
+                        <div class="work-title">🎨 ドット絵メーカー</div>
+                        <div class="work-desc">画像をレトロなドット絵に変換・保存</div>
+                    </div>
+                    <span style="color: var(--text-muted);">↗</span>
+                </a>
+                <a href="https://kyoro224.github.io/ToDo_list/" class="work-item">
+                    <div>
+                        <div class="work-title">📝 ToDoリスト</div>
+                        <div class="work-desc">日々のタスクをすっきり管理・整理</div>
+                    </div>
+                    <span style="color: var(--text-muted);">↗</span>
+                </a>
+                <a href="https://kyoro224.github.io/calculator/" class="work-item">
+                    <div>
+                        <div class="work-title">🧮 電卓ツール</div>
+                        <div class="work-desc">シンプルで使いやすい計算アプリ</div>
+                    </div>
+                    <span style="color: var(--text-muted);">↗</span>
+                </a>
+                <a href="https://kyoro224.github.io/Sekigae_Maker/" class="work-item">
+                    <div>
+                        <div class="work-title">🪑席替えメーカー</div>
+                        <div class="work-desc">シンプルな席替えメーカー</div>
+                    </div>
+                    <span style="color: var(--text-muted);">↗</span>
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <h2>リンク・連絡先</h2>
+            <div class="works-list" style="max-height: none; overflow-y: visible;">
+                <a href="post.html" class="work-item">
+                    <div>
+                        <div class="work-title">💬 開発者のつぶやき</div>
+                        <div class="work-desc">日々のアップデートやお知らせ（同サイト内）</div>
+                    </div>
+                    <span style="color: var(--text-muted);">→</span>
+                </a>
+                <a href="https://marshmallow-qa.com/pw3yqs72scdnttg?t=qgHmrA&utm_medium=url_text&utm_source=promotion" class="work-item" target="_blank" rel="noopener noreferrer">
+                    <div>
+                        <div class="work-title">☁️ マシュマロ（質問・感想はこちら）</div>
+                        <div class="work-desc">匿名での質問や感想を受付中</div>
+                    </div>
+                    <span style="color: var(--text-muted);">↗</span>
+                </a>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <a href="https://kyoro224.github.io/privacy/index.html" class="privacy-link">プライバシーポリシー</a>
+        </footer>
+    </div>
+
+    <script>
+        const welcomeModal = document.getElementById('welcomeModal');
+        const closeWelcomeBtn = document.getElementById('closeWelcomeBtn');
+        const startAppBtn = document.getElementById('startAppBtn');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const hasVisitedDev = localStorage.getItem('devHasVisited');
+            if (!hasVisitedDev) {
+                welcomeModal.style.display = 'flex';
+            }
+        });
+
+        function closeWelcomeModal() {
+            localStorage.setItem('devHasVisited', 'true');
+            welcomeModal.style.display = 'none';
+        }
+
+        closeWelcomeBtn.addEventListener('click', closeWelcomeModal);
+        startAppBtn.addEventListener('click', closeWelcomeModal);
+        welcomeModal.addEventListener('click', (e) => {
+            if (e.target === welcomeModal) {
+                closeWelcomeModal();
+            }
+        });
+    </script>
+</body>
+</html>
