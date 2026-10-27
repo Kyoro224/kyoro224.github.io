@@ -1,6 +1,12 @@
 // 開発者のつぶやきデータ（新しいものを上に追加してください）
 const tweetsData = [
     {
+        date: "2026.10.27",
+        content: "人数カウンターが完成しました！やったね~！",
+        link: "https://kyoro224.github.io/counter/",
+        linkText: "人数カウンター"
+    },
+    {
         date: "2026.10.22",
         content: "各種アイコンの検索ヒット時の表示がついに出来たぞー！やったね~！",
         link: "",
